@@ -1,11 +1,9 @@
 package com.androiddevs.shoppinglisttestingyt.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
+@Dao
 interface ShoppingDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -18,5 +16,5 @@ interface ShoppingDao {
     fun getShoppingItems(): LiveData<List<ShoppingEntity>>
 
     @Query("SELECT SUM(price * amount) FROM shopping_items")
-    fun getTotalPrice(): LiveData<List<ShoppingEntity>>
+    fun getTotalPrice(): LiveData<Float>
 }
