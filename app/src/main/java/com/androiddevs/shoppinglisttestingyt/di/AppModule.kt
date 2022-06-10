@@ -2,8 +2,11 @@ package com.androiddevs.shoppinglisttestingyt.di
 
 import android.content.Context
 import androidx.room.Room
+import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingDao
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingDatabase
 import com.androiddevs.shoppinglisttestingyt.data.remote.PixabayApi
+import com.androiddevs.shoppinglisttestingyt.reposotories.DefaultShoppingRepository
+import com.androiddevs.shoppinglisttestingyt.reposotories.ShoppingRepository
 import com.androiddevs.shoppinglisttestingyt.utils.Constants.BASE_URL
 import com.androiddevs.shoppinglisttestingyt.utils.Constants.DATABASE_NAME
 import dagger.Module
@@ -23,6 +26,13 @@ object AppModule {
     fun provideShoppingItemDatabase(
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(context, ShoppingDatabase::class.java, DATABASE_NAME).build()
+
+    @Singleton
+    @Provides
+    fun provideDefaultShoppingRepository( // since we pass a ShoppingRepository Interface in our ViewModel Constructor dagger will look if we provide such an interface
+        dao: ShoppingDao,
+        api:PixabayApi
+    ) = DefaultShoppingRepository(dao, api) as ShoppingRepository
 
     @Singleton
     @Provides
