@@ -26,6 +26,7 @@ class ShoppingDaoTest {
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
+
     private lateinit var database: ShoppingDatabase
     private lateinit var dao: ShoppingDao
 

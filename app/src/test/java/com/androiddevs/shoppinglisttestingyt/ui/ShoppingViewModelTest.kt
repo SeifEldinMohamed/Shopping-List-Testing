@@ -1,6 +1,7 @@
 package com.androiddevs.shoppinglisttestingyt.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.androiddevs.shoppinglisttestingyt.MainCoroutineRule
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingEntity
 import com.androiddevs.shoppinglisttestingyt.getOrAwaitValueTest
 import com.androiddevs.shoppinglisttestingyt.repositories.FakeShoppingRepository
@@ -19,6 +20,9 @@ class ShoppingViewModelTest{
     // instant task executor rule
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule() // so that we just make sure that every thing will run in the same thread one action after another
+
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule() // so that we just make sure that every thing will run in the same thread one action after another
 
     @Before
     fun setup(){
