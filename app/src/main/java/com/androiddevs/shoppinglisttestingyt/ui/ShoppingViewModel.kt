@@ -14,7 +14,6 @@ import com.androiddevs.shoppinglisttestingyt.utils.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class ShoppingViewModel @ViewModelInject constructor(
     private val repository: ShoppingRepository
 ): ViewModel() {

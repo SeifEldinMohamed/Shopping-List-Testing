@@ -12,13 +12,14 @@ import com.androiddevs.shoppinglisttestingyt.utils.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationContext::class) // make sure that the life time of the dependencies we declare here in this module will be as long as our application lives
+@InstallIn(ApplicationComponent::class) // make sure that the life time of the dependencies we declare here in this module will be as long as our application lives
 object AppModule {
 
     @Singleton

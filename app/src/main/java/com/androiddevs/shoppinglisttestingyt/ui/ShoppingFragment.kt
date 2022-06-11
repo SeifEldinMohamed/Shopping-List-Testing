@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.androiddevs.shoppinglisttestingyt.R
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class ShoppingFragment : Fragment() {
 lateinit var viewModel: ShoppingViewModel
     override fun onCreateView(
