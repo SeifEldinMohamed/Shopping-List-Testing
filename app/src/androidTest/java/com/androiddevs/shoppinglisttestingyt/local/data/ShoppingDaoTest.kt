@@ -9,6 +9,8 @@ import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingDao
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingDatabase
 import com.androiddevs.shoppinglisttestingyt.data.local.ShoppingEntity
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -16,27 +18,30 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)  // we make sure that all tests inside this class will run on the emulator and tell jUnit that this is instrumented tests
+// @RunWith(AndroidJUnit4::class)  // we make sure that all tests inside this class will run on the emulator and tell jUnit that this is instrumented tests
 @SmallTest // to tell junit that we write here unit tests
+@HiltAndroidTest // to specify to hilt that we want to inject dependencies in this classes
 class ShoppingDaoTest {
+
+    @get: Rule
+    var hiltRule = HiltAndroidRule(this)
 
     @Rule
     @JvmField
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-
+    @Inject
+    @Named("test_db")
     private lateinit var database: ShoppingDatabase
     private lateinit var dao: ShoppingDao
 
     @Before
     fun setUp() {
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            ShoppingDatabase::class.java
-        ).allowMainThreadQueries()
-            .build()
+        hiltRule.inject()
         dao = database.shoppingDao()
     }
 
